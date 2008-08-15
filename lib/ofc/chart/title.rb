@@ -3,7 +3,7 @@ module Ofc
     # Title
     # style : css style : (?)
     # text  : string : (null)
-    class Title
+    class Title < Base
       attr_accessor :style,
                     :text
                     

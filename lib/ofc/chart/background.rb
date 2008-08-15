@@ -3,7 +3,7 @@ module Ofc
     # Background
     # :bg_colour : hex color (#f8f8d8)
     # :bg_image  : ??
-    class Background
+    class Background < Base
       attr_accessor :bg_colour, #bg_colour
                     :bg_image #bg_image
 
@@ -12,6 +12,7 @@ module Ofc
       alias_attribute :image, :bg_image
       
       def initialize
+        super
         @bg_colour = '#f8f8d8'
         @bg_image = nil
       end

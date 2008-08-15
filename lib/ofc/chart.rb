@@ -1,3 +1,4 @@
+require 'ofc/chart/base'
 require 'ofc/chart/axes'
 require 'ofc/chart/background'
 require 'ofc/chart/legend'
@@ -40,5 +41,7 @@ module Ofc
       @y2_legend = Y2Legend.new
       # options_to_attributes opts
     end
+
   end
+  
 end

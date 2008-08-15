@@ -2,6 +2,7 @@ require 'ofc/extensions'
 require 'ofc/chart'
 require 'ofc/elements'
 
+
 module Ofc
   # nothing to see here
   module Version

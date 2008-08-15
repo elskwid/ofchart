@@ -52,6 +52,15 @@ describe Ofc::Chart::XAxis do
     end
   end
   
+  it "should provide a way of using a hash of values for the initial values" do
+    
+    initial_values = {:colour => '#FFFFFF', :grid_color => '#eee', :max => 100, :offset => false}
+    x = Ofc::Chart::XAxis.new(initial_values)
+
+    initial_values.each do |k,v|
+      x.send(k).should == v
+    end
+  end
 end
 
 describe Ofc::Chart::XAxisLabels do

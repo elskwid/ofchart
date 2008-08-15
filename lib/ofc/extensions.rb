@@ -26,13 +26,5 @@ class Module
       def #{new_name}=(v); self.#{old_name} = v; end
     STR
   end
-  
-  # So we can pass in a hash of values for defined attributes
-  def options_to_attributes(opts={})
-    @options = opts
-    if opts.kind_of? Hash
-      opts.each{ |k,v| self.send(k.to_sym,v) if self.respond_to? k.to_sym }
-    end
-  end
-  
+
 end

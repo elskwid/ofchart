@@ -3,7 +3,7 @@ module Ofc
     # XLegend
     # style : css style : (?)
     # text  : string : (null)
-    class XLegend
+    class XLegend < Base
       attr_accessor :style,
                     :text
     end
@@ -11,7 +11,7 @@ module Ofc
     # YLegend
     # style : css style : (?)
     # text  : string : (null)
-    class YLegend
+    class YLegend < Base
       attr_accessor :style,
                     :text
       # json name y_legend
@@ -20,7 +20,7 @@ module Ofc
     # Y2Legend (right)
     # style : css style : (?)
     # text  : string : (null)
-    class Y2Legend
+    class Y2Legend < Base
       attr_accessor :style,
                     :text
       # json name y2_legend

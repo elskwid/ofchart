@@ -10,7 +10,7 @@ module Ofc
     # :stroke : integer (2)
     # :text : string (_default)
     # :title : style ("color: #0000F0; font-weight: bold; font-size: 12;")
-    class ToolTip
+    class ToolTip < Base
       attr_accessor :background,
                     :body,
                     :colour,
@@ -24,6 +24,7 @@ module Ofc
       alias_attribute :color, :colour
       
       def initialize
+        super
         @background = '#f0f0f0'
         @body = "color: #000000; font-weight: normal; font-size: 12;"
         @colour = '#808080'

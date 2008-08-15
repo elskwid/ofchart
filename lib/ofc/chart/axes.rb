@@ -10,7 +10,7 @@ module Ofc
     # stroke      : integer (2)
     # three_d     : integer (0)
     # tick_height : integer (3)
-    class XAxis
+    class XAxis < Base
       attr_accessor :colour,
                     :grid_colour,
                     :max,
@@ -24,7 +24,7 @@ module Ofc
       alias_attribute :color, :colour
       alias_attribute :grid_color, :grid_colour
       
-      def initialize
+      def initialize(options={})
         @colour = '#784016'
         @grid_colour = '#f5e1aa'
         @max = nil
@@ -34,6 +34,7 @@ module Ofc
         @stroke = 2
         @three_d = 0
         @tick_height = 3
+        set_options_attributes(options)
       end
     end
   
@@ -44,7 +45,7 @@ module Ofc
     # size    : integer (10)
     # steps   : integer (1)
     # visible : boolean (true)
-    class XAxisLabels
+    class XAxisLabels  < Base
       attr_accessor :colour,
                     :labels,
                     :rotate,
@@ -55,6 +56,7 @@ module Ofc
       alias_attribute :color, :colour
       
       def initialize
+        super
         @colour = '#000000'
         @labels = []
         @rotate = nil
@@ -76,7 +78,7 @@ module Ofc
     # three_d     : integer (0)
     # tick_length : integer (3)    
     # visible     : boolean (true) [false for YAxis right]
-    class YAxisBase
+    class YAxisBase < Base
       attr_accessor :colour,
                     :grid_colour,
                     :max,
@@ -92,6 +94,7 @@ module Ofc
       alias_attribute :grid_color, :grid_colour 
       
       def initialize
+        super
         @colour = '#784016'
         @grid_colour = '#f5e1aa'
         @max = nil
@@ -138,6 +141,7 @@ module Ofc
       alias_attribute :color, :colour
       
       def initialize
+        super
         @colour = '#000000'
         @labels =[]
         @size = 10
