@@ -22,6 +22,18 @@ module Ofc
                     :title
                     
       alias_attribute :color, :colour
+      
+      def initialize
+        @background = '#f0f0f0'
+        @body = "color: #000000; font-weight: normal; font-size: 12;"
+        @colour = '#808080'
+        @mouse = nil
+        @rounded = 1
+        @shadow = true
+        @stroke = 2
+        @text = ''
+        @title = "color: #0000F0; font-weight: bold; font-size: 12;"
+      end
     end
   end
 end

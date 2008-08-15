@@ -22,6 +22,18 @@ module Ofc
                     
       alias_attribute :color, :colour
       alias_attribute :colors, :colours
+      
+      def initialize
+        super
+        @alpha = 0.5
+        @animate = 1
+        @colour = '#900000'
+        @colours = ['#900000','#009000']
+        @gradient_fill = 1
+        @start_angle = 90
+        @stroke = 1
+        @tip = nil
+      end
     end
 
   end

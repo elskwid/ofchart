@@ -27,6 +27,17 @@ module Ofc
       attr_accessor :font_size, #font-size
                     :text,
                     :width
+                    
+      def initialize
+        super
+        @colour = '#3030d0'
+        @dot_size = 5
+        @font_size = 12
+        @halo_size = 2
+        @text = ''
+        @tip = nil # this *really gets set by ofc chart
+        @width = 2
+      end
     end
     
     # LineDot
@@ -37,7 +48,14 @@ module Ofc
     # :colour     : hexcolor (#80a033)
     # :font-size  : integer (10)
     # :dot-size   : (6)
-    class LineHollow < Line; end
+    class LineHollow < Line
+      def initialize
+        super
+        @colour = '#80a033'
+        @font_size = 10
+        @dot_size = 6
+      end
+    end
     
   end
 end

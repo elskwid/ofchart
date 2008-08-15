@@ -23,6 +23,18 @@ module Ofc
                      
       alias_attribute :color, :colour
       alias_attribute :grid_color, :grid_colour
+      
+      def initialize
+        @colour = '#784016'
+        @grid_colour = '#f5e1aa'
+        @max = nil
+        @min = 0
+        @offset = true
+        @steps = 1
+        @stroke = 2
+        @three_d = 0
+        @tick_height = 3
+      end
     end
   
     # XAxis Labels
@@ -41,6 +53,15 @@ module Ofc
                     :visible
 
       alias_attribute :color, :colour
+      
+      def initialize
+        @colour = '#000000'
+        @labels = []
+        @rotate = nil
+        @size = 10
+        @steps = 1
+        @visible = true
+      end
     end
     
     
@@ -69,14 +90,36 @@ module Ofc
 
       alias_attribute :color, :colour
       alias_attribute :grid_color, :grid_colour 
+      
+      def initialize
+        @colour = '#784016'
+        @grid_colour = '#f5e1aa'
+        @max = nil
+        @min = 0
+        @offset = false
+        @steps = 1
+        @stroke = 2
+        @three_d = 0
+        @tick_length = 3
+        @visible = true
+      end
     end
     
+    # YAxis
     class YAxis < YAxisBase
       # json name y_axis
     end
     
+    #Y2Axis
+    # max         : integer|null (10)
+    # visible     : boolean (false)
     class Y2Axis < YAxisBase
       # json name y_axis_right
+      def initialize
+        super
+        @max = 10
+        @visible = false
+      end
     end
     
     # YAxis LabelsBase
@@ -93,6 +136,14 @@ module Ofc
                     :visible
                     
       alias_attribute :color, :colour
+      
+      def initialize
+        @colour = '#000000'
+        @labels =[]
+        @size = 10
+        @steps = nil
+        @visible = true
+      end
     end
 
     class YAxisLabels < YAxisLabelsBase
