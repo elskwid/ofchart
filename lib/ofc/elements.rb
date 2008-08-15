@@ -1,0 +1,5 @@
+require 'ofc/elements/base'
+require 'ofc/elements/bar'
+require 'ofc/elements/line'
+require 'ofc/elements/pie'
+require 'ofc/elements/scatter'
