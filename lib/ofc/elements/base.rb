@@ -5,6 +5,10 @@ module Ofc
     # :values : array ([])
     class Base
       attr_accessor :values
+      
+      def initialize
+        @values =[]
+      end
     end
     
   end
