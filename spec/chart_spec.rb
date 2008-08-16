@@ -28,6 +28,34 @@ describe Ofc::Chart do
     @chart.y2_legend.should be_a_kind_of(Ofc::Chart::Y2Legend)
   end
 
+
+end
+
+describe "Some random Ofc::Chart object" do
+  
+  it "should provide a way of using a hash of values for the initial values for XAxis" do
+    
+    # since all these objects descend from base, and have the HasehedAttributes mixed in, this should work all around
+    initial_values = {:colour => '#FFFFFF', :grid_color => '#eee', :max => 100, :offset => false}
+    x = Ofc::Chart::XAxis.new(initial_values)
+
+    initial_values.each do |k,v|
+      x.send(k).should == v
+    end
+  end
+  
+  it "should provide a way of using a hash of values for the initial values for Title" do
+    
+    # since all these objects descend from base, and have the HasehedAttributes mixed in, this should work all around
+    initial_values = {:style => 'font-size: 12;', :text => 'TEST TITLE'}
+    x = Ofc::Chart::Title.new(initial_values)
+
+    initial_values.each do |k,v|
+      x.send(k).should == v
+    end
+  end  
+  
+  
 end
 
 # Axes tests
@@ -51,16 +79,7 @@ describe Ofc::Chart::XAxis do
       b.send(k).should == v
     end
   end
-  
-  it "should provide a way of using a hash of values for the initial values" do
-    
-    initial_values = {:colour => '#FFFFFF', :grid_color => '#eee', :max => 100, :offset => false}
-    x = Ofc::Chart::XAxis.new(initial_values)
 
-    initial_values.each do |k,v|
-      x.send(k).should == v
-    end
-  end
 end
 
 describe Ofc::Chart::XAxisLabels do
