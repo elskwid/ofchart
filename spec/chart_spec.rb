@@ -53,6 +53,8 @@ describe "Some random Ofc::Chart object" do
     initial_values.each do |k,v|
       x.send(k).should == v
     end
+    x.text.should_not == "SOME OTHER TITLE"
+    x.text.should_not == ''
   end  
   
   

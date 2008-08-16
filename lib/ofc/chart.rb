@@ -10,38 +10,22 @@ module Ofc
   # Chart is combination of all the elements(bar, line, hollow line, etc)
   # with a title and labels. It is the 'canvas' for the other objects
   class Chart
-    attr_accessor :options, # internal
-                  :background,
-                  :elements,
-                  :title,
-                  :tool_tip,
-                  :x_axis,
-                  :x_axis_labels,
-                  :x_legend,
-                  :y_axis,
-                  :y_axis_labels,
-                  :y2_axis,
-                  :y2_axis_labels,
-                  :y_legend,
-                  :y2_legend
+    attr_accessor_with_default :options,        {} # internal
+    attr_accessor_with_default :background,     Ofc::Chart::Background.new
+    attr_accessor_with_default :elements,       []
+    attr_accessor_with_default :title,          Ofc::Chart::Title.new
+    attr_accessor_with_default :tool_tip,       Ofc::Chart::ToolTip.new
+    attr_accessor_with_default :x_axis,         Ofc::Chart::XAxis.new
+    attr_accessor_with_default :x_axis_labels,  Ofc::Chart::XAxisLabels.new
+    attr_accessor_with_default :x_legend,       Ofc::Chart::XLegend.new
+    attr_accessor_with_default :y_axis,         Ofc::Chart::YAxis.new
+    attr_accessor_with_default :y_axis_labels,  Ofc::Chart::YAxisLabels.new
+    attr_accessor_with_default :y2_axis,        Ofc::Chart::Y2Axis.new
+    attr_accessor_with_default :y2_axis_labels, Ofc::Chart::Y2AxisLabels.new
+    attr_accessor_with_default :y_legend,       Ofc::Chart::YLegend.new
+    attr_accessor_with_default :y2_legend,      Ofc::Chart::Y2Legend.new
 
     # TODO: Provide a way to pass in hashes for a bunch of this stuff
-    def initialize(opts={})
-      @background = Background.new
-      @elements= []
-      @title = Title.new
-      @tool_tip = ToolTip.new
-      @x_axis = XAxis.new
-      @x_axis_labels = XAxisLabels.new
-      @x_legend = XLegend.new
-      @y_axis = YAxis.new
-      @y_axis_labels = YAxisLabels.new
-      @y2_axis = Y2Axis.new
-      @y2_axis_labels = Y2AxisLabels.new
-      @y_legend = YLegend.new
-      @y2_legend = Y2Legend.new
-    end
-
   end
   
 end
