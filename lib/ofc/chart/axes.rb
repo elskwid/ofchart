@@ -34,7 +34,8 @@ module Ofc
         @stroke = 2
         @three_d = 0
         @tick_height = 3
-        set_options_attributes(options)
+        super
+        
       end
     end
   

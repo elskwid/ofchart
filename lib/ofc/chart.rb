@@ -6,9 +6,9 @@ require 'ofc/chart/title'
 require 'ofc/chart/tool_tip'
 
 module Ofc
+  
   # Chart is combination of all the elements(bar, line, hollow line, etc)
   # with a title and labels. It is the 'canvas' for the other objects
-  
   class Chart
     attr_accessor :options, # internal
                   :background,
@@ -25,6 +25,7 @@ module Ofc
                   :y_legend,
                   :y2_legend
 
+    # TODO: Provide a way to pass in hashes for a bunch of this stuff
     def initialize(opts={})
       @background = Background.new
       @elements= []
@@ -39,7 +40,6 @@ module Ofc
       @y2_axis_labels = Y2AxisLabels.new
       @y_legend = YLegend.new
       @y2_legend = Y2Legend.new
-      # options_to_attributes opts
     end
 
   end
