@@ -8,35 +8,21 @@ module Ofc
     # offset      : boolean (true)
     # steps       : integer (1)
     # stroke      : integer (2)
-    # three_d     : integer (0)
+    # three_d     : integer (0) # 3d
     # tick_height : integer (3)
     class XAxis < Base
-      attr_accessor :colour,
-                    :grid_colour,
-                    :max,
-                    :min,
-                    :offset,
-                    :steps,
-                    :stroke,
-                    :three_d, # 3d
-                    :tick_height
+      attr_accessor_with_default  :colour,      '#784016'
+      attr_accessor_with_default  :grid_colour, '#f5e1aa'
+      attr_accessor_with_default  :max,         nil
+      attr_accessor_with_default  :min,         0
+      attr_accessor_with_default  :offset,      true
+      attr_accessor_with_default  :steps,       1
+      attr_accessor_with_default  :stroke,      2
+      attr_accessor_with_default  :three_d,     0 # 3d
+      attr_accessor_with_default  :tick_height, 3
                      
       alias_attribute :color, :colour
       alias_attribute :grid_color, :grid_colour
-      
-      def initialize(options={})
-        @colour = '#784016'
-        @grid_colour = '#f5e1aa'
-        @max = nil
-        @min = 0
-        @offset = true
-        @steps = 1
-        @stroke = 2
-        @three_d = 0
-        @tick_height = 3
-        super
-        
-      end
     end
   
     # XAxis Labels
