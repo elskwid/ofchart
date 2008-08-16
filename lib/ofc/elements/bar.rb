@@ -4,26 +4,17 @@ module Ofc
     # BarBase
     # :alpha      : integer (?)
     # :colour     : hex color (#3030d0)
-    # :font-size  : integer (12)
+    # :font-size  : integer (12) 
     # :text       : string ('')
     # :tip        : string (?)
     class BarBase < Base
-      attr_accessor :alpha,
-                    :colour,
-                    :font_size, #font-size
-                    :text,
-                    :tip
+      attr_accessor_with_default :alpha,      nil
+      attr_accessor_with_default :colour,     '#3030d0'
+      attr_accessor_with_default :font_size,  12
+      attr_accessor_with_default :text,       ''
+      attr_accessor_with_default :tip,        nil
                     
       alias_attribute :color, :colour
-      
-      def initialize
-        super
-        @alpha = nil
-        @colour = '#3030d0'
-        @font_size = 12
-        @text = ''
-        @tip = nil
-      end
     end
     
     # Bar
@@ -44,30 +35,19 @@ module Ofc
     # BarOutline
     # :outline-colour : hex color (#000000)
     class BarOutline < BarBase
-      attr_accessor :outline_colour # outline-colour
+      attr_accessor_with_default :outline_colour, '#000000' 
       
       alias_attribute :outline_color, :outline_colour
-      
-      def initialize
-        super
-        @outline_colour = '#000000'
-      end
     end
     
     # BarSketch
     # :outline-colour : hex color (#000000)
     # :offset         : integer (3)    
     class BarSketch < BarBase
-      attr_accessor :outline_colour, # outline-colour
-                    :offset
+      attr_accessor_with_default :outline_colour, '#000000' 
+      attr_accessor_with_default :offset,         3
                     
       alias_attribute :outline_color, :outline_colour
-      
-      def initialize
-        super
-        @outline_colour = '#000000'
-        @offset = 3
-      end
     end
 
     # BarStack
@@ -78,18 +58,12 @@ module Ofc
     # :font-size  : integer (?)
     # :text       : string (null)
     class HBar < Base
-      attr_accessor :colour,
-                    :font_size, # font-size
-                    :text
+      attr_accessor_with_default :colour,     nil
+      attr_accessor_with_default :font_size,  nil 
+      attr_accessor_with_default :text,       ''
                     
       alias_attribute :color, :colour
-      
-      def initialize
-        super
-        @colour = nil
-        @font_size = nil
-        @text = ''
-      end
     end
+    
   end
 end

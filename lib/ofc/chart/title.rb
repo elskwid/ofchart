@@ -4,9 +4,9 @@ module Ofc
     # style : css style : (?)
     # text  : string : (null)
     class Title < Base
-      attr_accessor :style,
-                    :text
-                    
+      attr_accessor_with_default :style,  ''
+      attr_accessor_with_default :text,   ''
     end
+    
   end
 end

@@ -4,12 +4,8 @@ module Ofc
     # Base element
     # :values : array ([])
     class Base
-      attr_accessor :values
-      
-      def initialize()
-        @values =[]
-      end
-      
+      attr_accessor_with_default :values,  []
+
     end
     
   end

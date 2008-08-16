@@ -4,16 +4,16 @@ module Ofc
     # style : css style : (?)
     # text  : string : (null)
     class XLegend < Base
-      attr_accessor :style,
-                    :text
+      attr_accessor_with_default :style,  ''
+      attr_accessor_with_default :text,   ''
     end
               
     # YLegend
     # style : css style : (?)
     # text  : string : (null)
     class YLegend < Base
-      attr_accessor :style,
-                    :text
+      attr_accessor_with_default :style,  ''
+      attr_accessor_with_default :text,   ''
       # json name y_legend
     end
     
@@ -21,8 +21,8 @@ module Ofc
     # style : css style : (?)
     # text  : string : (null)
     class Y2Legend < Base
-      attr_accessor :style,
-                    :text
+      attr_accessor_with_default :style,  ''
+      attr_accessor_with_default :text,   ''
       # json name y2_legend
     end
     

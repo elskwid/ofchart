@@ -249,8 +249,8 @@ describe Ofc::Chart::XLegend do
                 :text
                 
   it "should have the default fields and values" do
-    attributes = {:style => nil,
-                  :text => nil}
+    attributes = {:style => '',
+                  :text => ''}
     b = Ofc::Chart::XLegend.new
     attributes.each do |k,v|
       b.should respond_to(k)
@@ -265,8 +265,8 @@ describe Ofc::Chart::YLegend do
   # json name y_legend
   
   it "should have the default fields and values" do
-    attributes = {:style => nil,
-                  :text => nil}
+    attributes = {:style => '',
+                  :text => ''}
     b = Ofc::Chart::YLegend.new
     attributes.each do |k,v|
       b.should respond_to(k)
@@ -281,8 +281,8 @@ describe Ofc::Chart::Y2Legend do
   # json name y2_legend
   
   it "should have the default fields and values" do
-    attributes = {:style => nil,
-                  :text => nil}
+    attributes = {:style => '',
+                  :text => ''}
     b = Ofc::Chart::Y2Legend.new
     attributes.each do |k,v|
       b.should respond_to(k)
@@ -297,8 +297,8 @@ describe Ofc::Chart::Title do
   # json name y2_legend
   
   it "should have the default fields and values" do
-    attributes = {:style => nil,
-                  :text => nil}
+    attributes = {:style => '',
+                  :text => ''}
     b = Ofc::Chart::Title.new
     attributes.each do |k,v|
       b.should respond_to(k)
