@@ -81,9 +81,6 @@ class Module
   
   # This one is all me. For good or ill. With thanks to Rails and Why
   def default_chart_attributes(attrs={})
-    puts "DEFAULTS:"
-    puts attrs.inspect
-    
     return @chart_attributes if attrs.empty?
     # chart attributes method
     meta_def :chart_attributes do 
@@ -101,15 +98,23 @@ class Module
     end
     
     # set the defaults
-    class_def :initialize do
-      attrs.each do |k,v|
-        # FIXME: we call dup here, which means that we have one extra class
-        # instance defined for every call. Ugh.
-        v = v.dup unless %w(NilClass Fixnum TrueClass FalseClass).include? v.class.name 
-        instance_variable_set( "@#{k}", v )
+    class_eval do
+      define_method :initialize do |*options|
+        super # get the base class if it is there
+        attrs.each do |k,v|
+          # FIXME: we call dup here, which means that we have one extra class instance defined for every call. Ugh.
+          v = v.dup unless %w(NilClass Fixnum TrueClass FalseClass).include? v.class.name 
+          instance_variable_set( "@#{k}", v )
+        end
+        opts = options.first || Hash.new
+        opts.each do |k,v| 
+          # use send rather than instance_variable so we can get aliased methods/attributes
+          self.send("#{k.to_sym}=",v) if self.respond_to? k.to_sym
+          # instance_variable_set( "@#{k}", v )            
+        end        
       end
-      super
     end
-  end  
     
+  end  
+  
 end

@@ -7,14 +7,13 @@ describe Ofc::Chart do
   end
   
   it "should produce json when to_json is called" do
-    # puts @chart.to_json
-    # puts @chart.to_json.inspect
-    puts @chart.title.text = "hi"
-    puts @chart.title
+    puts "*********************************************************"
+    @title = Ofc::Chart::Title.new(:text => 'the new default')
+    puts @title.inspect
+    @title.text = "hi"
+    puts @title.inspect
     
-    @chart2 = Ofc::Chart.new
-    puts "CHART 2"
-    puts @chart2.title
+    
   end
   
 end

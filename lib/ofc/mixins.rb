@@ -12,6 +12,7 @@ module Ofc
     attr_accessor :options
     
     def initialize(options={})
+      super()
       set_options_attributes(options)
     end
    
@@ -22,6 +23,8 @@ module Ofc
         if opts.kind_of? Hash
           opts.each do |k,v| 
             self.send("#{k.to_sym}=",v) if self.respond_to? k.to_sym
+            puts "@#{k} -> #{v}"
+            # instance_variable_set( "@#{k}", v )            
           end
         end
       end

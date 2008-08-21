@@ -4,12 +4,12 @@ module Ofc
 
     # Base class used for chart items
     class Base
-      include Ofc::HashedAttributes
-      include Ofc::JSON
+      # include Ofc::HashedAttributes
+      # include Ofc::JSON
       
       # Anything?
       def initialize(options={})
-        super
+        # nada
       end
       
     end
