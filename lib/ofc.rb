@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'json/add/core'
+
 require 'ofc/extensions'
 require 'ofc/mixins'
 require 'ofc/chart'

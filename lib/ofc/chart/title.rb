@@ -4,8 +4,8 @@ module Ofc
     # style : css style : (?)
     # text  : string : (null)
     class Title < Base
-      attr_accessor_with_default :style,  ''
-      attr_accessor_with_default :text,   ''
+      default_chart_attributes  :style  =>  '',
+                                :text   =>  ''
     end
     
   end

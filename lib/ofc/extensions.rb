@@ -1,3 +1,21 @@
+# _why!
+class Object
+  # The hidden singleton lurks behind everyone
+  def metaclass; class << self; self; end; end
+  def meta_eval &blk; metaclass.instance_eval &blk; end
+
+  # Adds methods to a metaclass
+  def meta_def name, &blk
+   meta_eval { define_method name, &blk }
+  end
+
+  # Defines an instance method within a class
+  def class_def name, &blk
+   class_eval { define_method name, &blk }
+  end
+end
+ 
+
 class Module
   # From Rails ActiveSupport -->
   # Allows you to make aliases for attributes, which includes 
@@ -61,4 +79,37 @@ class Module
     EVAL
   end
   
+  # This one is all me. For good or ill. With thanks to Rails and Why
+  def default_chart_attributes(attrs={})
+    puts "DEFAULTS:"
+    puts attrs.inspect
+    
+    return @chart_attributes if attrs.empty?
+    # chart attributes method
+    meta_def :chart_attributes do 
+      attrs.keys
+    end
+    # accessors for the attributes/keys
+    attrs.keys.each do |sym|
+      module_eval(<<-EVAL, __FILE__, __LINE__)
+        def #{sym}; @#{sym}; end
+        
+        def #{sym}=(value)
+          @#{sym} = value
+        end
+      EVAL
+    end
+    
+    # set the defaults
+    class_def :initialize do
+      attrs.each do |k,v|
+        # FIXME: we call dup here, which means that we have one extra class
+        # instance defined for every call. Ugh.
+        v = v.dup unless %w(NilClass Fixnum TrueClass FalseClass).include? v.class.name 
+        instance_variable_set( "@#{k}", v )
+      end
+      super
+    end
+  end  
+    
 end

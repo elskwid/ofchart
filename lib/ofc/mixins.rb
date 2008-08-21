@@ -27,5 +27,24 @@ module Ofc
       end
     
   end
-  
+
+
+  module JSON
+    def to_json(*a)
+      # TODO: get the 'name' of the object
+      if self.class.respond_to? :chart_attributes
+        result = {}
+        self.class.chart_attributes.inject(result) do |r,name|
+          r[name] = self.send(name)
+          r
+        end
+        result.to_json(*a)    
+      else
+        # call the default from json...
+        super
+      end
+    end
+    
+  end
+      
 end
