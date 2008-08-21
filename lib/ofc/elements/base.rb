@@ -4,7 +4,7 @@ module Ofc
     # Base element
     # :values : array ([])
     class Base
-      attr_accessor_with_default :values,  []
+      default_chart_attributes  :values   =>  []
 
     end
     

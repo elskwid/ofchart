@@ -8,11 +8,11 @@ module Ofc
     # :text       : string ('')
     # :tip        : string (?)
     class BarBase < Base
-      attr_accessor_with_default :alpha,      nil
-      attr_accessor_with_default :colour,     '#3030d0'
-      attr_accessor_with_default :font_size,  12
-      attr_accessor_with_default :text,       ''
-      attr_accessor_with_default :tip,        nil
+      default_chart_attributes  :alpha      =>  nil,
+                                :colour     =>  '#3030d0',
+                                :font_size  =>  12,
+                                :text       =>  '',
+                                :tip        =>  nil
                     
       alias_attribute :color, :colour
     end
@@ -35,7 +35,7 @@ module Ofc
     # BarOutline
     # :outline-colour : hex color (#000000)
     class BarOutline < BarBase
-      attr_accessor_with_default :outline_colour, '#000000' 
+      default_chart_attributes  :outline_colour   =>  '#000000' 
       
       alias_attribute :outline_color, :outline_colour
     end
@@ -44,8 +44,8 @@ module Ofc
     # :outline-colour : hex color (#000000)
     # :offset         : integer (3)    
     class BarSketch < BarBase
-      attr_accessor_with_default :outline_colour, '#000000' 
-      attr_accessor_with_default :offset,         3
+      default_chart_attributes  :outline_colour   =>  '#000000',
+                                :offset           =>  3
                     
       alias_attribute :outline_color, :outline_colour
     end
@@ -58,9 +58,9 @@ module Ofc
     # :font-size  : integer (?)
     # :text       : string (null)
     class HBar < Base
-      attr_accessor_with_default :colour,     nil
-      attr_accessor_with_default :font_size,  nil 
-      attr_accessor_with_default :text,       ''
+      default_chart_attributes  :colour     =>  nil,
+                                :font_size  =>  nil,
+                                :text       =>  ''
                     
       alias_attribute :color, :colour
     end

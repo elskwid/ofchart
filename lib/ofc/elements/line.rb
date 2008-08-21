@@ -6,10 +6,10 @@ module Ofc
     # :halo-size  : integer (?)
     # :tip        : ?
     class BaseLine < Base
-      attr_accessor_with_default :colour,    nil
-      attr_accessor_with_default :dot_size,  nil
-      attr_accessor_with_default :halo_size, nil
-      attr_accessor_with_default :tip,       nil
+      default_chart_attributes  :colour     =>  nil,
+                                :dot_size   =>  nil,
+                                :halo_size  =>  nil,
+                                :tip        =>  nil
 
       alias_attribute :color, :colour
     end
@@ -24,13 +24,13 @@ module Ofc
     # :width      : integer (2)
     #     * declared in base class
     class Line < BaseLine
-      attr_accessor_with_default :colour,     '#3030d0'
-      attr_accessor_with_default :dot_size,   5
-      attr_accessor_with_default :font_size,  12
-      attr_accessor_with_default :halo_size,  2
-      attr_accessor_with_default :text,       ''
-      attr_accessor_with_default :tip,        nil      
-      attr_accessor_with_default :width,      2
+      default_chart_attributes  :colour     =>  '#3030d0',
+                                :dot_size   =>  5,
+                                :font_size  =>  12,
+                                :halo_size  =>  2,
+                                :text       =>  '',
+                                :tip        =>  nil,
+                                :width      =>  2
       # color accessor added in BaseLine
     end
     
@@ -43,9 +43,9 @@ module Ofc
     # :font-size  : integer (10)
     # :dot-size   : (6)
     class LineHollow < Line
-      attr_accessor_with_default :colour,     '#80a033'      
-      attr_accessor_with_default :font_size,  10
-      attr_accessor_with_default :dot_size,   6            
+      default_chart_attributes  :colour     =>  '#80a033',
+                                :font_size  =>  10,
+                                :dot_size   =>  6            
     end
     
   end

@@ -103,7 +103,7 @@ class Module
         super # get the base class if it is there
         attrs.each do |k,v|
           # FIXME: we call dup here, which means that we have one extra class instance defined for every call. Ugh.
-          v = v.dup unless %w(NilClass Fixnum TrueClass FalseClass).include? v.class.name 
+          v = v.dup unless %w(NilClass Fixnum TrueClass FalseClass Float).include? v.class.name 
           instance_variable_set( "@#{k}", v )
         end
         opts = options.first || Hash.new
