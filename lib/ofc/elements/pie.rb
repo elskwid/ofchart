@@ -11,7 +11,8 @@ module Ofc
     # :stroke         : integer (1)
     # :tip            : string ('#val# of #total#')
     class Pie < Base
-      default_chart_attributes  :alpha          =>  0.5,
+      default_chart_attributes  :object_name    =>  'pie',
+                                :alpha          =>  0.5,
                                 :animate        =>  1,
                                 :colour         =>  '#900000',
                                 :colours        =>  ['#900000', '#009000'],

@@ -11,7 +11,8 @@ module Ofc
     # three_d     : integer (0) # 3d
     # tick_height : integer (3)
     class XAxis < Base
-      default_chart_attributes  :colour       =>  '#784016',
+      default_chart_attributes  :object_name  => 'x_legend',
+                                :colour       =>  '#784016',
                                 :grid_colour  =>  '#f5e1aa',
                                 :max          =>  nil,
                                 :min          =>  0,
@@ -33,12 +34,13 @@ module Ofc
     # steps   : integer (1)
     # visible : boolean (true)
     class XAxisLabels  < Base
-      default_chart_attributes  :colour   =>  '#000000',
-                                :labels   =>  [],
-                                :rotate   =>  nil,
-                                :size     =>  10,
-                                :steps    =>  1,
-                                :visible  =>  true
+      default_chart_attributes  :object_name  => 'x_axis_labels',
+                                :colour       =>  '#000000',
+                                :labels       =>  [],
+                                :rotate       =>  nil,
+                                :size         =>  10,
+                                :steps        =>  1,
+                                :visible      =>  true
 
       alias_attribute :color, :colour
     end
@@ -56,16 +58,17 @@ module Ofc
     # tick_length : integer (3)    
     # visible     : boolean (true) [false for YAxis right]
     class YAxisBase < Base
-      default_chart_attributes  :colour         =>  '#784016',
-                                :grid_colour    =>  '#f5e1aa',
-                                :max            =>  nil,
-                                :min            =>  0,
-                                :offset         =>  false,
-                                :steps          =>  1,
-                                :stroke         =>  2,
-                                :three_d        =>  0,
-                                :tick_length    =>  3,
-                                :visible        =>  true
+      default_chart_attributes  :object_name  => '',
+                                :colour       =>  '#784016',
+                                :grid_colour  =>  '#f5e1aa',
+                                :max          =>  nil,
+                                :min          =>  0,
+                                :offset       =>  false,
+                                :steps        =>  1,
+                                :stroke       =>  2,
+                                :three_d      =>  0,
+                                :tick_length  =>  3,
+                                :visible      =>  true
 
       alias_attribute :color, :colour
       alias_attribute :grid_color, :grid_colour 
@@ -73,6 +76,7 @@ module Ofc
     
     # YAxis
     class YAxis < YAxisBase
+      default_chart_attributes  :object_name  =>  'y_axis'
       # json name y_axis
     end
     
@@ -80,8 +84,9 @@ module Ofc
     # max         : integer|null (10)
     # visible     : boolean (false)
     class Y2Axis < YAxisBase
-      default_chart_attributes  :max      =>  10,
-                                :visible  =>  false
+      default_chart_attributes  :object_name  => 'y_axis_right',
+                                :max          =>  10,
+                                :visible      =>  false
       # json name y_axis_right
     end
     
@@ -92,20 +97,23 @@ module Ofc
     # steps   : integer (?)
     # visible : boolean (true)
     class YAxisLabelsBase
-      default_chart_attributes  :colour   =>  '#000000',
-                                :labels   =>  [],
-                                :size     =>  10,
-                                :steps    =>  nil,
-                                :visible  =>  true
+      default_chart_attributes  :object_name  => '',
+                                :colour       =>  '#000000',
+                                :labels       =>  [],
+                                :size         =>  10,
+                                :steps        =>  nil,
+                                :visible      =>  true
                     
       alias_attribute :color, :colour
     end
 
     class YAxisLabels < YAxisLabelsBase
+      default_chart_attributes  :object_name  =>  'y_label_'
       # json name y_label_
     end
     
     class Y2AxisLabels < YAxisLabelsBase
+      default_chart_attributes  :object_name  =>  'y_label_2_'
       # json name y_label_2_
     end
     

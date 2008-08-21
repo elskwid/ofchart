@@ -8,11 +8,12 @@ module Ofc
     # :text       : string ('')
     # :width      : integer (2)
     class Scatter < Base
-      default_chart_attributes  :colour     =>  '#3030d0',
-                                :dot_size   =>  5,
-                                :font_size  =>  12,
-                                :text       =>  '',
-                                :width      =>  2
+      default_chart_attributes  :object_name  =>  'scatter',
+                                :colour       =>  '#3030d0',
+                                :dot_size     =>  5,
+                                :font_size    =>  12,
+                                :text         =>  '',
+                                :width        =>  2
                     
       alias_attribute :color, :colour
     end

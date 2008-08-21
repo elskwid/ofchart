@@ -12,7 +12,8 @@ describe Ofc::Chart do
     puts @title.inspect
     @title.text = "hi"
     puts @title.inspect
-    
+
+    puts @chart.to_json
     
   end
   

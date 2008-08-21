@@ -4,8 +4,9 @@ module Ofc
     # style : css style : (?)
     # text  : string : (null)
     class Title < Base
-      default_chart_attributes  :style  =>  '',
-                                :text   =>  ''
+      default_chart_attributes  :object_name  => 'title',
+                                :style        =>  '',
+                                :text         =>  ''
     end
     
   end

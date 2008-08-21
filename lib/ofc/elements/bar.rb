@@ -8,7 +8,8 @@ module Ofc
     # :text       : string ('')
     # :tip        : string (?)
     class BarBase < Base
-      default_chart_attributes  :alpha      =>  nil,
+      default_chart_attributes  :object_name  => '',
+                                :alpha      =>  nil,
                                 :colour     =>  '#3030d0',
                                 :font_size  =>  12,
                                 :text       =>  '',
@@ -18,24 +19,35 @@ module Ofc
     end
     
     # Bar
-    class Bar < BarBase; end
+    class Bar < BarBase
+      default_chart_attributes  :object_name  =>  'bar'
+    end
 
     # Bar3D
-    class Bar3D < BarBase; end
+    class Bar3D < BarBase
+      default_chart_attributes  :object_name  =>  'bar_3d'
+    end
     
     # BarCandle
-    class BarCandle < BarBase; end
+    class BarCandle < BarBase
+      default_chart_attributes  :object_name  =>  'bar_candle' #could be candle
+    end
     
     # BarFade
-    class BarFade < BarBase; end
+    class BarFade < BarBase
+      default_chart_attributes  :object_name  =>  'bar_fade'
+    end
     
     # BarGlass
-    class BarGlass < BarBase; end
+    class BarGlass < BarBase
+      default_chart_attributes  :object_name  =>  'bar_glass'
+    end
     
     # BarOutline
     # :outline-colour : hex color (#000000)
     class BarOutline < BarBase
-      default_chart_attributes  :outline_colour   =>  '#000000' 
+      default_chart_attributes  :object_name      =>  'bar_outline',
+                                :outline_colour   =>  '#000000' 
       
       alias_attribute :outline_color, :outline_colour
     end
@@ -44,23 +56,27 @@ module Ofc
     # :outline-colour : hex color (#000000)
     # :offset         : integer (3)    
     class BarSketch < BarBase
-      default_chart_attributes  :outline_colour   =>  '#000000',
+      default_chart_attributes  :object_name      =>  'bar_sketch',
+                                :outline_colour   =>  '#000000',
                                 :offset           =>  3
                     
       alias_attribute :outline_color, :outline_colour
     end
 
     # BarStack
-    class BarStack < BarBase; end
+    class BarStack < BarBase
+      default_chart_attributes  :object_name  =>  'bar_stack'
+    end
 
     # HBar
     # :colour     : hex color (?)
     # :font-size  : integer (?)
     # :text       : string (null)
     class HBar < Base
-      default_chart_attributes  :colour     =>  nil,
-                                :font_size  =>  nil,
-                                :text       =>  ''
+      default_chart_attributes  :object_name  =>  'hbar',
+                                :colour       =>  nil,
+                                :font_size    =>  nil,
+                                :text         =>  ''
                     
       alias_attribute :color, :colour
     end

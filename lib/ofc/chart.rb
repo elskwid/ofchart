@@ -29,10 +29,10 @@ module Ofc
     
     def to_json(*a)
       {
-        'background' => background.to_json(*a),
-        'tool_tip' => tool_tip.to_json(*a),
-        'title' => title.to_json(*a)
-      }
+        background.object_name => background.to_json(*a),
+        tool_tip.object_name => tool_tip.to_json(*a),
+        title.object_name => title.to_json(*a)
+      }.to_json(*a)
     end
   end
   
