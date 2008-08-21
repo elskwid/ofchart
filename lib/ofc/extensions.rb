@@ -101,7 +101,7 @@ class Module
     # set the defaults
     class_eval do
       define_method :initialize do |*options|
-        super # call to super
+        super() # call to super
         # set instance variables for the attributes
         attrs.each do |k,v|
           # FIXME: we call dup here, which means that we have one extra class instance defined for every call. Ugh.

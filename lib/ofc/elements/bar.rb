@@ -8,7 +8,7 @@ module Ofc
     # :text       : string ('')
     # :tip        : string (?)
     class BarBase < Base
-      default_chart_attributes  :object_name  =>  '',
+      default_chart_attributes  :type  =>  '',
                                 :alpha        =>  nil,
                                 :colour       =>  '#3030d0',
                                 :font_size    =>  12,
@@ -20,33 +20,33 @@ module Ofc
     
     # Bar
     class Bar < BarBase
-      default_chart_attributes  :object_name  =>  'bar'
+      default_chart_attributes  :type  =>  'bar'
     end
 
     # Bar3D
     class Bar3D < BarBase
-      default_chart_attributes  :object_name  =>  'bar_3d'
+      default_chart_attributes  :type  =>  'bar_3d'
     end
     
     # BarCandle
     class BarCandle < BarBase
-      default_chart_attributes  :object_name  =>  'bar_candle' #could be candle
+      default_chart_attributes  :type  =>  'bar_candle' #could be candle
     end
     
     # BarFade
     class BarFade < BarBase
-      default_chart_attributes  :object_name  =>  'bar_fade'
+      default_chart_attributes  :type  =>  'bar_fade'
     end
     
     # BarGlass
     class BarGlass < BarBase
-      default_chart_attributes  :object_name  =>  'bar_glass'
+      default_chart_attributes  :type  =>  'bar_glass'
     end
     
     # BarOutline
     # :outline-colour : hex color (#000000)
     class BarOutline < BarBase
-      default_chart_attributes  :object_name      =>  'bar_outline',
+      default_chart_attributes  :type      =>  'bar_outline',
                                 :outline_colour   =>  '#000000' 
       
       alias_attribute :outline_color, :outline_colour
@@ -56,7 +56,7 @@ module Ofc
     # :outline-colour : hex color (#000000)
     # :offset         : integer (3)    
     class BarSketch < BarBase
-      default_chart_attributes  :object_name      =>  'bar_sketch',
+      default_chart_attributes  :type      =>  'bar_sketch',
                                 :outline_colour   =>  '#000000',
                                 :offset           =>  3
                     
@@ -65,7 +65,7 @@ module Ofc
 
     # BarStack
     class BarStack < BarBase
-      default_chart_attributes  :object_name  =>  'bar_stack'
+      default_chart_attributes  :type  =>  'bar_stack'
     end
 
     # HBar
@@ -73,7 +73,7 @@ module Ofc
     # :font-size  : integer (?)
     # :text       : string (null)
     class HBar < Base
-      default_chart_attributes  :object_name  =>  'hbar',
+      default_chart_attributes  :type  =>  'hbar',
                                 :colour       =>  nil,
                                 :font_size    =>  nil,
                                 :text         =>  ''

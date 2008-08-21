@@ -5,7 +5,6 @@ module Ofc
     # :values : array ([])
     class Base
       default_chart_attributes  :values   =>  []
-
     end
     
   end

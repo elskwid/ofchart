@@ -6,7 +6,7 @@ module Ofc
     # :halo-size  : integer (?)
     # :tip        : ?
     class BaseLine < Base
-      default_chart_attributes  :object_name  =>  '',
+      default_chart_attributes  :type  =>  '',
                                 :colour       =>  nil,
                                 :dot_size     =>  nil,
                                 :halo_size    =>  nil,
@@ -25,7 +25,7 @@ module Ofc
     # :width      : integer (2)
     #     * declared in base class
     class Line < BaseLine
-      default_chart_attributes  :object_name  =>  'line',
+      default_chart_attributes  :type  =>  'line',
                                 :colour       =>  '#3030d0',
                                 :dot_size     =>  5,
                                 :font_size    =>  12,
@@ -39,7 +39,7 @@ module Ofc
     # LineDot
     #  * defaults from Line class
     class LineDot < Line
-      default_chart_attributes  :object_name  =>  'line_dot'      
+      default_chart_attributes  :type  =>  'line_dot'      
     end
     
     # LineHollow
@@ -47,7 +47,7 @@ module Ofc
     # :font-size  : integer (10)
     # :dot-size   : (6)
     class LineHollow < Line
-      default_chart_attributes  :object_name  =>  'line_hollow',
+      default_chart_attributes  :type  =>  'line_hollow',
                                 :colour       =>  '#80a033',
                                 :font_size    =>  10,
                                 :dot_size     =>  6            
