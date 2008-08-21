@@ -4,7 +4,6 @@ module Ofc
 
     # Base class used for chart items
     class Base
-      # include Ofc::HashedAttributes
       include Ofc::JSON
       
       # Anything?

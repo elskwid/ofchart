@@ -14,7 +14,7 @@ module Ofc
                                 :font_size    =>  12,
                                 :text         =>  '',
                                 :tip          =>  nil
-                    
+                                                    
       alias_attribute :color, :colour
     end
     

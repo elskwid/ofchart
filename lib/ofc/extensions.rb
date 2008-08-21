@@ -82,9 +82,20 @@ class Module
   # This one is all me. For good or ill. With thanks to Rails and Why
   def default_chart_attributes(attrs={})
     return @chart_attributes if attrs.empty?
+    # if superclass.respond_to? :chart_attributes 
+    #   keys = attrs.keys + (superclass.chart_attributes || [])
+    # else
+    #   keys = attrs.keys
+    # end
+    
     # chart attributes method
     meta_def :chart_attributes do 
-      attrs.keys
+      if superclass.respond_to? :chart_attributes
+        # if we have attrs in the super class, union them with this
+        attrs.keys | (superclass.chart_attributes || [])
+      else
+        attrs.keys
+      end
     end
     
     # accessors for the attributes/keys
@@ -101,7 +112,7 @@ class Module
     # set the defaults
     class_eval do
       define_method :initialize do |*options|
-        super() # call to super
+        super rescue super() # call to super
         # set instance variables for the attributes
         attrs.each do |k,v|
           # FIXME: we call dup here, which means that we have one extra class instance defined for every call. Ugh.
