@@ -8,12 +8,12 @@ module Ofc
     # :text       : string ('')
     # :tip        : string (?)
     class BarBase < Base
-      default_chart_attributes  :object_name  => '',
-                                :alpha      =>  nil,
-                                :colour     =>  '#3030d0',
-                                :font_size  =>  12,
-                                :text       =>  '',
-                                :tip        =>  nil
+      default_chart_attributes  :object_name  =>  '',
+                                :alpha        =>  nil,
+                                :colour       =>  '#3030d0',
+                                :font_size    =>  12,
+                                :text         =>  '',
+                                :tip          =>  nil
                     
       alias_attribute :color, :colour
     end

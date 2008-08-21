@@ -10,7 +10,10 @@ module Ofc
   # Chart is combination of all the elements(bar, line, hollow line, etc)
   # with a title and labels. It is the 'canvas' for the other objects
   class Chart
-    default_chart_attributes  :options          =>  Hash.new, # internal
+    include Ofc::JSON    
+    # TODO: Provide a way to pass in hashes for a bunch of this stuff
+    default_chart_attributes  :object_name      =>  '',
+                              :options          =>  Hash.new, # internal
                               :background       =>  Ofc::Chart::Background.new,
                               :elements         =>  Array.new,
                               :title            =>  Ofc::Chart::Title.new,
@@ -25,15 +28,6 @@ module Ofc
                               :y_legend         =>  Ofc::Chart::YLegend.new,
                               :y2_legend        =>  Ofc::Chart::Y2Legend.new
 
-    # TODO: Provide a way to pass in hashes for a bunch of this stuff
-    
-    def to_json(*a)
-      {
-        background.object_name => background.to_json(*a),
-        tool_tip.object_name => tool_tip.to_json(*a),
-        title.object_name => title.to_json(*a)
-      }.to_json(*a)
-    end
   end
   
 end

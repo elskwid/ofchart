@@ -86,6 +86,7 @@ class Module
     meta_def :chart_attributes do 
       attrs.keys
     end
+    
     # accessors for the attributes/keys
     attrs.keys.each do |sym|
       module_eval(<<-EVAL, __FILE__, __LINE__)
@@ -100,17 +101,34 @@ class Module
     # set the defaults
     class_eval do
       define_method :initialize do |*options|
-        super # get the base class if it is there
+        super # call to super
+        # set instance variables for the attributes
         attrs.each do |k,v|
           # FIXME: we call dup here, which means that we have one extra class instance defined for every call. Ugh.
           v = v.dup unless %w(NilClass Fixnum TrueClass FalseClass Float).include? v.class.name 
           instance_variable_set( "@#{k}", v )
         end
+        # Provides a way to pass a hash of values to the initialize method
+        # of a class and have any keys that are attributes of that class
+        # sent to the class with the corresponding value.
+        #
+        # example = SomeClass.new(:name => 'Buckaroo', :girlfriend => 'Penny Priddy')
+        #  Would set example.name = 'Buckaroo' and example.girlfriend = 'Penny Priddy'
+        #
+        # Skips any keys that aren't attributes of the class.
+        # Provides an options attribute to retrieve the passed in hash        
         opts = options.first || Hash.new
         opts.each do |k,v| 
           # use send rather than instance_variable so we can get aliased methods/attributes
           self.send("#{k.to_sym}=",v) if self.respond_to? k.to_sym
           # instance_variable_set( "@#{k}", v )            
+        end        
+      end
+      # method to return a hash of attributes and values
+      define_method :chart_attribute_values do
+        self.class.chart_attributes.inject({}) do |values, name|
+          values[name.to_s] = instance_variable_get("@#{name}")
+          values
         end        
       end
     end

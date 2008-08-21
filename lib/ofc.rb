@@ -1,5 +1,6 @@
 require 'rubygems'
-require 'json/add/core'
+require 'json/add/rails'
+# require 'activesupport'
 
 require 'ofc/extensions'
 require 'ofc/mixins'

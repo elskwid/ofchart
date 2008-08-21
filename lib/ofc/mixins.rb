@@ -32,20 +32,29 @@ module Ofc
   end
 
 
-  module JSON
+  module JSON    
     def to_json(*a)
-      # TODO: get the 'name' of the object
+      ofc_keys = {
+        :grid_colour    => 'grid-colour',
+        :three_d        => '3d',
+        :tick_height    => 'tick-height',
+        :tick_length    => 'tick-length',
+        :font_size      => 'font-size',
+        :outline_colour => 'outline-colour',
+        :dot_size       => 'dot-size',
+        :halo_size      => 'halo-size',
+        :gradient_fill  => 'gradient-fill',
+        :start_angle    => 'start-angle'
+      }
       if self.class.respond_to? :chart_attributes
-        attrs = self.class.chart_attributes
-        result = {}
-        attrs.reject{|k| k == :object_name}.inject(result) do |r,name|
-          r[name] = self.send(name)
-          r
-        end
-        # {self.send(:object_name) => result.to_json(*a)}    
-        result.to_json(*a)
+        result = '{'
+        result << self.class.chart_attributes.map do |key|
+          # check object for object_name and add it to the keys
+          ofc_keys[key] = self.send(key).object_name if self.send(key).respond_to? :object_name
+          "#{(ofc_keys[key]||key).to_json}: #{self.send(key).to_json}"
+        end * ', '
+        result << '}'
       else
-        # call the default from json...
         super
       end
     end
