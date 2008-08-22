@@ -1,6 +1,7 @@
 $:.unshift(File.dirname(__FILE__) + '/../lib') 
 
 require 'lib/ofc'
+require 'lib/ofchart'
 # Place for the test data
 
 module TestData

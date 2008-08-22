@@ -78,7 +78,7 @@ class Module
       end
     EVAL
   end
-  
+    
   # This one is all me. For good or ill. With thanks to Rails and Why
   def default_chart_attributes(attrs={})
     return @chart_attributes if attrs.empty?
@@ -145,5 +145,49 @@ class Module
     end
     
   end  
+  
+  # Mine too!
+  def default_attributes(attrs={})
+    # accessors for the attributes/keys
+    attrs.keys.each do |sym|
+      module_eval(<<-EVAL, __FILE__, __LINE__)
+        def #{sym}; @#{sym}; end
+        
+        def #{sym}=(value)
+          @#{sym} = value
+        end
+      EVAL
+    end
+    
+    # set the defaults
+    class_eval do
+      define_method :initialize do |*options|
+        super rescue super() # call to super
+        # set instance variables for the attributes
+        attrs.each do |k,v|
+          # FIXME: we call dup here, which means that we have one extra class instance defined for every call. Ugh.
+          v = v.dup unless %w(NilClass Fixnum TrueClass FalseClass Float).include? v.class.name 
+          instance_variable_set( "@#{k}", v )
+        end
+        # Provides a way to pass a hash of values to the initialize method
+        # of a class and have any keys that are attributes of that class
+        # sent to the class with the corresponding value.
+        #
+        # example = SomeClass.new(:name => 'Buckaroo', :girlfriend => 'Penny Priddy')
+        #  Would set example.name = 'Buckaroo' and example.girlfriend = 'Penny Priddy'
+        #
+        # Skips any keys that aren't attributes of the class.
+        # Provides an options attribute to retrieve the passed in hash        
+        opts = options.first || Hash.new
+        opts.each do |k,v| 
+          # use send rather than instance_variable so we can get aliased methods/attributes
+          self.send("#{k.to_sym}=",v) if self.respond_to? k.to_sym
+          # instance_variable_set( "@#{k}", v )            
+        end        
+      end
+    end
+    
+  end
+  
   
 end

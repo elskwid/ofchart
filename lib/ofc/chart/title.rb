@@ -9,5 +9,20 @@ module Ofc
                                 :text         =>  ''
     end
     
+    # css style can contain:
+    # font-size
+    # color
+    # background-color
+    # text-align
+    # margin
+    # margin-left
+    # margin-right
+    # margin-top
+    # margin-bottom
+    # padding
+    # padding-left
+    # padding-right
+    # padding-top
+    # padding-bottom    
   end
 end
