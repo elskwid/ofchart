@@ -26,7 +26,7 @@ module Ofc
     # :tip          : string (value of point) '#val#'
     # :width        : integer (2)
     class AreaHollow < BaseLine
-      default_cjart_attributes  :type       =>  'area_hollow',
+      default_chart_attributes  :type       =>  'area_hollow',
                                 :colour     =>  '#3030d0',
                                 :dot_size   =>  5,
                                 :fill       =>  nil,
