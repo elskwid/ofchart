@@ -52,6 +52,14 @@ module Ofc
       alias_attribute :outline_color, :outline_colour
     end
     
+    # BarFilled (just another name for BarOutline)
+    class BarFilled < BarBase
+      default_chart_attributes  :type      =>  'bar_filled',
+                                :outline_colour   =>  '#000000' 
+      
+      alias_attribute :outline_color, :outline_colour
+    end
+    
     # BarSketch
     # :outline-colour : hex color (#000000)
     # :offset         : integer (3)    
