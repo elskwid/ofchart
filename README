@@ -1,0 +1,35 @@
+Ofchart (& Ofc)
+=====================================================================
+Ofchart is a Ruby API around the Open Flash Chart 2 library from John Glazebrook at (http://teethgrinder.co.uk/open-flash-chart-2/)
+
+In the end, all this library does is generate the right JSON for OFC2 - and really, that is all it needs to do.
+
+
+In brief
+=====================================================================
+Ofchart is an attempt to make using Open Flash Chart as Rubyish as possible, with some specific nods to charting. To do this there are actually two libraries in use: Ofc & Ofchart
+
+	Ofc is the object oriented way of dealing with the details of Open Flash Chart 2. This library is a contract with OFC2 that gave me a way to anchor Ofchart. Ofc has all the building blocks needed to create the charts supported by OFC2.
+	
+	Ofchart is a different beast. I took some guidance, and some code, from the Googlecharts (Gchart) library that lets you call a chart like this:  Gchart.line(:title => 'my title', :size => '400x600') also, Gchart uses some theme support which is sorely lacking in the OFC world. Ofchart uses a similar API and includes the support for similar themes (the files are identical) with a few changes. 
+	
+Hopefully, calling Ofchart like this: Ofchart::Chart.bar(:title => 'my bar chart', :theme => 'default', :size => '400x400', :data => [1,2,3,4,5]) is much better than composing the underlying Ofc::Chart & Ofc::Elements objects then calling to_json on the whole mess.
+
+
+What's next
+=====================================================================
+I am currently putting this project in a Rails application to see how it holds up. Improvements will get rolled back in as I make them and, I would expect, a Rails plugin-ish thing will be extracted to ease that pain.
+
+
+Requirements
+=====================================================================
+Gems:
+	JSON
+	rspec (to run the tests)
+	
+
+That reminds me
+=====================================================================
+Ofchart & Ofc have what is the nice start to a test suite. You can run them like this: rake spec
+
+
