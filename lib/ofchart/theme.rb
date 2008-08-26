@@ -6,10 +6,22 @@ module Ofchart
     
     @@theme_files = ["#{File.dirname(__FILE__)}/themes.yml"]
 
-    attr_accessor :colors
-    attr_accessor :bar_colors
-    attr_accessor :background
-    attr_accessor :chart_background
+    attr_accessor :name,
+                  :color,
+                  :colors,
+                  :background,
+                  :title_size,
+                  :title_color,
+                  :legend_size,
+                  :legend_color,
+                  :key_size,
+                  :x_size,
+                  :x_color,
+                  :y_size,
+                  :y_color,
+                  :grid_color,
+                  :rounded,
+                  :animated
     
     def self.load(theme_name)
       theme = new(theme_name)
@@ -27,20 +39,39 @@ module Ofchart
     def initialize(theme_name)
       themes = {}
       @@theme_files.each {|f| themes.update YAML::load(File.open(f))}
-      theme = themes[theme_name]
+      @name = theme_name.to_s
+      theme = themes[theme_name.to_sym]
       if theme
-        self.colors = theme[:colors]
-        self.bar_colors = theme[:bar_colors]
-        self.background = theme[:background]
-        self.chart_background = theme[:chart_background]
+        theme.keys.each do |key|
+          self.send("#{key}=", theme[key]) if self.respond_to?("#{key}=")
+        end
         self
       else
         raise(ThemeNotFound, "Could not locate the #{theme_name} theme ...")
       end
     end
     
-    def to_options
-      {:background => background, :chart_background => chart_background, :bar_colors => bar_colors.join(',')}
+    def to_chart_options
+      {
+        :theme => name,
+        :color => color,
+        :colors => colors,
+        :background_color => background,
+        :title_size => title_size,
+        :title_color => title_color,
+        :x_legend_size => legend_size,
+        :x_legend_color => legend_color,
+        :y_legend_size => legend_size,
+        :y_legend_color => legend_color,
+        :x_key_size => key_size,
+        :x_label_size => x_size,
+        :x_label_color => x_color,
+        :y_label_size => y_size,
+        :y_label_color => y_color,
+        :grid_color => grid_color,
+        :tip_rounded => rounded,
+        :animate_pie => animated
+      }.reject{|k,v| v.nil?} # remove nil values
     end
   end
 end

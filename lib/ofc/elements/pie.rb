@@ -3,7 +3,7 @@ module Ofc
 
     # Pie chart
     # :alpha          : float (0.5)
-    # :animate        : integer (1) 1||0 ?
+    # :animate        : boolean (true||false) default true
     # :colour         : hex color (#900000)
     # :colours        : array of hex colors (["#900000", "#009000"])
     # :gradient-fill  : integer (1)

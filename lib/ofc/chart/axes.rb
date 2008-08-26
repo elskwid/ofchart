@@ -29,7 +29,7 @@ module Ofc
     # XAxis Labels
     # colour  : hex color (#000000)
     # labels  : array ([])
-    # rotate  : integer null|1|2 (null)
+    # rotate  : string (horizontal||vertical||diagonal) default horizontal
     # size    : integer (10)
     # steps   : integer (1)
     # visible : boolean (true)

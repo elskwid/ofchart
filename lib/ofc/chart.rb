@@ -28,7 +28,10 @@ module Ofc
                               :y_legend         =>  Ofc::Chart::YLegend.new,
                               :y2_legend        =>  Ofc::Chart::Y2Legend.new
 
-   
+    # convenience method to get the chart type
+    def type
+      elements.first.type
+    end
   end
   
 end
