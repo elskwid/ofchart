@@ -53,7 +53,7 @@ module Ofchart
                   :y_label_color, # color for y labels
                   :dot_size, # for charts with dots, this is the size 
                   :dot_margin, # for charts with dots, this is the margin around them (ofc calls this the halo)
-                  :animate_pie, # (true | false) if the pie should be animated (default is true)
+                  :animate_pie, # (true | false) if the pie should be animated (default true [1])
                   :pie_angle, # the angle of the start of the pie (default is 90)
                   :line_width # used to set the stroke/line width in places
                   
@@ -65,7 +65,7 @@ module Ofchart
       def method_missing(meth, options={})
         # theme loading is in the initialize
         if @@types.include?(meth.to_s)
-          chart = new(options.merge({:type => meth}))
+          chart = new(options.merge({:type => "#{meth}"}))
           chart.build_chart
           # @chart.to_json
         else
@@ -116,7 +116,7 @@ module Ofchart
       # title
       @chart.title.text = @title if @title
       @title_style ||= {}
-      @title_style.merge!({'color' => @title_color, 'font-size' => @title_size}) # merge style with color & size
+      @title_style.merge!({'color' => @title_color, 'font-size' => @title_size}) if @title_style.empty? # merge style with color & size
       @chart.title.style = css(@title_style) if @title_style
       # tool tip
       @chart.tool_tip.background = @tip_background_color if @tip_background_color
@@ -133,7 +133,7 @@ module Ofchart
       # x legend
       @chart.x_legend.text = @x_legend if @x_legend
       @x_legend_style ||= {}
-      @x_legend_style.merge!({'color' => @x_legend_color, 'font-size' => @x_legend_size}) # merge style with color & size
+      @x_legend_style.merge!({'color' => @x_legend_color, 'font-size' => @x_legend_size})  if @x_legend_style.empty? # merge style with color & size
       @chart.x_legend.style = css(@x_legend_style) if @x_legend_style
       # x labels
       @chart.x_axis_labels.labels = @x_labels if @x_labels
@@ -147,7 +147,7 @@ module Ofchart
       # y legend
       @chart.y_legend.text = @y_legend if @y_legend
       @y_legend_style ||= {}
-      @y_legend_style.merge!({'color' => @y_legend_color, 'font-size' => @y_legend_size}) # merge style with color & size
+      @y_legend_style.merge!({'color' => @y_legend_color, 'font-size' => @y_legend_size}) if @y_legend_style.empty? # merge style with color & size
       @chart.y_legend.style = css(@y_legend_style) if @y_legend_style
       # y labels
       @chart.y_axis_labels.labels = @y_labels if @y_labels
@@ -165,7 +165,7 @@ module Ofchart
       
       # set the pie stuff
       if @type == 'pie'
-        @element.animate = @animate_pie unless @animate_pie.nil?
+        @element.animate = @animate_pie ? 1 : 0 unless @animate_pie.nil?
         @element.start_angle = @pie_angle if @pie_angle
       end
       
@@ -192,7 +192,9 @@ module Ofchart
       
       def css(hash)
         # TODO: Would like this to be to_css on Hash
-        hash.map{|k,v| "#{k}:#{v};"}.join(' ') if hash
+        css = '{'
+        css << hash.map{|k,v| "#{k}:#{v};"}.join(' ') if hash
+        css << '}'
       end
       
       # TODO: Could this be factored into the ofc class?

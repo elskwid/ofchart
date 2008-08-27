@@ -31,7 +31,6 @@ describe Ofc::Chart::Title do
     @title = Ofc::Chart::Title.new
     json = @title.to_json.to_s
     json.should include('"text": ""')
-    json.should include('"object_name": "title"' )
   end
 
   it "should output the correct updated json" do
@@ -46,8 +45,7 @@ describe Ofc::Chart::ToolTip do
   it "should output the correct default json" do
     @tooltip = Ofc::Chart::ToolTip.new
     json = @tooltip.to_json.to_s
-    json.should include('"object_name": "tooltip"')
-    json.should include('"title": "color: #0000F0; font-weight: bold; font-size: 12;"')
+    json.should include('"title": "{color: #0000F0; font-weight: bold; font-size: 12;}"')
     json.should include('"rounded": 1')
   end
 
@@ -64,7 +62,6 @@ describe Ofc::Chart::YAxis do
   it "should have the correct default json" do
     @yaxis = Ofc::Chart::YAxis.new
     json = @yaxis.to_json.to_s
-    json.should include('"object_name": "y_axis"')
     json.should include('"grid-colour": "#f5e1aa"')
     json.should include('"tick-length": 3')
   end
@@ -81,7 +78,7 @@ describe Ofc::Elements::Bar do
     @bar = Ofc::Elements::Bar.new
     json = @bar.to_json.to_s
     json.should include('"type": "bar"')
-    json.should include('"alpha": null')
+    # json.should include('"alpha": null') nulls removed
     json.should include('"values": []')
   end
 
