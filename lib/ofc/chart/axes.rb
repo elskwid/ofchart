@@ -96,7 +96,7 @@ module Ofc
     # size    : integer (10)
     # steps   : integer (?)
     # visible : boolean (true)
-    class YAxisLabelsBase
+    class YAxisLabelsBase < Base
       default_chart_attributes  :object_name  =>  '',
                                 :colour       =>  '#000000',
                                 :labels       =>  [],

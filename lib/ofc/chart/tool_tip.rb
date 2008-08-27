@@ -13,14 +13,14 @@ module Ofc
     class ToolTip < Base
       default_chart_attributes :object_name =>  'tooltip',
                                :background  =>  '#f0f0f0',
-                               :body        =>  "color: #000000; font-weight: normal; font-size: 12;",
+                               :body        =>  "{color: #000000; font-weight: normal; font-size: 12;}",
                                :colour      =>  '#808080',
                                :mouse       =>  nil,
                                :rounded     =>  1,
                                :shadow      =>  true,
                                :stroke      =>  2,
                                :text        =>  '',
-                               :title       =>  "color: #0000F0; font-weight: bold; font-size: 12;"
+                               :title       =>  "{color: #0000F0; font-weight: bold; font-size: 12;}"
                     
       alias_attribute :color, :colour
     end
