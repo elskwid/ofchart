@@ -13,6 +13,8 @@ module Ofc
     include Ofc::JSON
     # TODO: Provide a way to pass in hashes for a bunch of this stuff
     default_chart_attributes  :object_name      =>  '',
+                              :width            =>  200,
+                              :height           =>  300,
                               :options          =>  Hash.new, # internal
                               :background       =>  Ofc::Chart::Background.new,
                               :elements         =>  Array.new,

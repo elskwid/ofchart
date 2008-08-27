@@ -109,7 +109,8 @@ module Ofchart
       # been set in this interface? For now, just check each of them.
       @chart = Ofc::Chart.new
       # @width & @height are outside the chart (part of the html/js)
-      
+      @chart.width = @width if @width
+      @chart.height = @height if @height
       # background
       @chart.background.bg_colour = @background_color if @background_color
       # title
