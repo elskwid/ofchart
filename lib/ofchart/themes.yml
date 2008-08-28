@@ -11,6 +11,7 @@
     - &white FFFFFF
     - &black !str 000000
   :color: *black
+  :outline: *black
   # :bar_colors: [ *blue, *yellow, *green, *red, *purple, *orange ]
   :background: *white
   :title_color: *black

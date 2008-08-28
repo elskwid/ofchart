@@ -19,16 +19,22 @@ module Ofc
                               :background       =>  Ofc::Chart::Background.new,
                               :elements         =>  Array.new,
                               :title            =>  Ofc::Chart::Title.new,
-                              :tool_tip         =>  Ofc::Chart::ToolTip.new,
-                              :x_axis           =>  Ofc::Chart::XAxis.new,
-                              :x_axis_labels    =>  Ofc::Chart::XAxisLabels.new,
-                              :x_legend         =>  Ofc::Chart::XLegend.new,
-                              :y_axis           =>  Ofc::Chart::YAxis.new,
-                              :y_axis_labels    =>  Ofc::Chart::YAxisLabels.new,
-                              :y2_axis          =>  Ofc::Chart::Y2Axis.new,
-                              :y2_axis_labels   =>  Ofc::Chart::Y2AxisLabels.new,
-                              :y_legend         =>  Ofc::Chart::YLegend.new,
-                              :y2_legend        =>  Ofc::Chart::Y2Legend.new
+                              :tool_tip         =>  nil,
+                              :x_axis           =>  nil,
+                              :x_legend         =>  nil,
+                              :y_axis           =>  nil,
+                              :y2_axis          =>  nil,
+                              :y_legend         =>  nil,
+                              :y2_legend        =>  nil
+                              
+                              # Don't really want these to be created all the time. Only when we need them
+                              # :tool_tip         =>  Ofc::Chart::ToolTip.new,
+                              # :x_axis           =>  Ofc::Chart::XAxis.new,
+                              # :x_legend         =>  Ofc::Chart::XLegend.new,
+                              # :y_axis           =>  Ofc::Chart::YAxis.new,
+                              # :y2_axis          =>  Ofc::Chart::Y2Axis.new,
+                              # :y_legend         =>  Ofc::Chart::YLegend.new,
+                              # :y2_legend        =>  Ofc::Chart::Y2Legend.new
 
     # convenience method to get the chart type
     def type

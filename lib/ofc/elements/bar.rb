@@ -43,7 +43,7 @@ module Ofc
       default_chart_attributes  :type  =>  'bar_glass'
     end
     
-    # BarOutline
+    # BarOutline - This one is floating around in the code base, but doesn't look to work!
     # :outline-colour : hex color (#000000)
     class BarOutline < BarBase
       default_chart_attributes  :type      =>  'bar_outline',

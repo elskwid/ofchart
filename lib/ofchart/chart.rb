@@ -31,7 +31,7 @@ module Ofchart
                   :tip_border_width, # weight of the border (stroke)
                   :tip_shadowed, # (true || false) shadow on the tips
                   :grid_color, # this is the color for x&y axis on the grid
-                  :x_steps, # how many x ticks are visible (2 makes every 2nd step visible)
+                  :x_steps, # how many x ticks are visible (2 makes every 2nd step visible) for the grid!
                   :x_color, # color for the xaxis not the grid
                   :x_key, # x key text
                   :x_key_size, # font-size for the x key
@@ -40,18 +40,21 @@ module Ofchart
                   :x_legend_size, # font-size of the x legend
                   :x_legend_style, # hash of style for the x legend
                   :x_labels, # array of labels for x axis
+                  :x_label_steps, # steps for the labels, not the grid
                   :x_label_color, # color for x labels
                   :x_label_size, # font-size for x labels
                   :x_label_orientation, # (horizontal || vertical) default to horizontal
-                  :y_steps, # how many y ticks are visible (2 makes every 2nd step visible)
+                  :y_steps, # how many y ticks are visible (2 makes every 2nd step visible) for the grid!
+                  :y_max, # the max value for the grid
                   :y_color, # color for the yaxis not the grid
                   :y_legend, # text for the y legend
                   :y_legend_color, # foreground color for y legend
                   :y_legend_size, # font-size of the y legend
                   :y_legend_style, # hash of style for the y legend
                   :y_labels, # array of labels for y axis
-                  :y_label_color, # color for y labels
-                  :y_label_size, # font-size for y labels
+                  # :y_label_steps, # steps for the labels not the grid
+                  # :y_label_color, # color for y labels
+                  # :y_label_size, # font-size for y labels
                   :dot_size, # for charts with dots, this is the size 
                   :dot_margin, # for charts with dots, this is the margin around them (ofc calls this the halo)
                   :pie_labels, # labels the pie slices (not the same as the tooltip)
@@ -89,11 +92,10 @@ module Ofchart
       @data = []
       @width = 300
       @height = 200
-      @title_style = {}
       # load the default theme & merge with the passed theme if it is there
       default_theme = Ofchart::Theme.load('default').to_chart_options
       theme = options[:theme] ? default_theme.merge(Ofchart::Theme.load(options[:theme]).to_chart_options) : default_theme
-      options.merge!(theme)
+      options = theme.merge(options)
       # set options passed in the options hash, if they have been defined
       options.each do |attribute, value| 
           send("#{attribute.to_s}=", value) if self.respond_to?("#{attribute}=")
@@ -118,60 +120,92 @@ module Ofchart
       @chart.height = @height if @height
       # background
       @chart.background.bg_colour = @background_color if @background_color
+      
       # title
       @chart.title.text = @title if @title
       @title_style ||= {}
-      @title_style['color'] = @title_color unless @title_style['color']
-      @title_style['font-size']= @title_size unless @title_style['font-size']
+      @title_style['color'] = @title_color if @title_style['color'].nil?
+      @title_style['font-size'] = @title_size unless @title_style['font-size']
       # This doesn't quite work the way I want
       # @title_style.merge!({'color' => @title_color, 'font-size' => @title_size}) if @title_style.empty? # merge style with color & size
       @chart.title.style = css(@title_style) if @title_style
-      # tool tip
-      @chart.tool_tip.text = @tip if @tip
-      @chart.tool_tip.background = @tip_background_color if @tip_background_color
-      @chart.tool_tip.colour = @tip_color if @tip_color
-      @chart.tool_tip.title = css(@tip_style) if @tip_style
-      @chart.tool_tip.body = css(@tip_body_style) if @tip_body_style
-      @chart.tool_tip.rounded = @tip_rounded ? 1 : 0 unless @tip_rounded.nil?
-      @chart.tool_tip.stroke = @tip_border_width if @tip_border_width
-      @chart.tool_tip.shadow = @tip_shadowed unless @tip_shadowed.nil?
-      # x axis
-      @chart.x_axis.grid_colour = @grid_color if @grid_color
-      @chart.x_axis.steps = @x_steps if @x_steps
-      @chart.x_axis.colour = @x_color if @x_color
-      # x legend
-      @chart.x_legend.text = @x_legend if @x_legend
-      @x_legend_style ||= {}
-      @x_legend_style['color'] = @x_legend_color unless @x_legend_style['color']
-      @x_legend_style['font-size'] = @x_legend_size unless @x_legend_style['font-size']
-      # @x_legend_style.merge!({'color' => @x_legend_color, 'font-size' => @x_legend_size})  if @x_legend_style.empty? # merge style with color & size
-      @chart.x_legend.style = css(@x_legend_style) if @x_legend_style
-      # x labels
-      @chart.x_axis_labels.labels = @x_labels if @x_labels
-      @chart.x_axis_labels.size = @x_label_size if @x_label_size
-      @chart.x_axis_labels.colour = @x_label_color if @x_axis_label_color
-      @chart.x_axis_labels.rotate = @x_label_orientation if @x_label_orientation
-      # y axis
-      @chart.y_axis.grid_colour = @grid_color if @grid_color
-      @chart.y_axis.steps = @y_steps if @y_steps
-      @chart.y_axis.colour = @y_color if @y_color
-      # y legend
-      @chart.y_legend.text = @y_legend if @y_legend
-      @y_legend_style ||= {}
-      @y_legend_style['color'] = @y_legend_color unless @y_legend_style['color']
-      @y_legend_style['font-size'] = @y_legend_size unless @y_legend_style['font-size']
-      # @y_legend_style.merge!({'color' => @y_legend_color, 'font-size' => @y_legend_size}) if @y_legend_style.empty? # merge style with color & size
-      @chart.y_legend.style = css(@y_legend_style) if @y_legend_style
-      # y labels
-      @chart.y_axis_labels.labels = @y_labels if @y_labels
-      @chart.y_axis_labels.size = @y_label_size if @y_label_size
-      @chart.y_axis_labels.colour = @y_label_color if @y_label_color
       
-      # chart type
+      # tool tip
+      if tooltip_set?
+        @chart.tool_tip = Ofc::Chart::ToolTip.new
+        @chart.tool_tip.text = @tip if @tip
+        @chart.tool_tip.background = @tip_background_color if @tip_background_color
+        @chart.tool_tip.colour = @tip_color if @tip_color
+        @chart.tool_tip.title = css(@tip_style) if @tip_style
+        @chart.tool_tip.body = css(@tip_body_style) if @tip_body_style
+        @chart.tool_tip.rounded = @tip_rounded ? 1 : 0 unless @tip_rounded.nil?
+        @chart.tool_tip.stroke = @tip_border_width if @tip_border_width
+        @chart.tool_tip.shadow = @tip_shadowed unless @tip_shadowed.nil?
+      end
+      
+      # x axis
+      if x_axis_set? || x_labels_set?
+        @chart.x_axis = Ofc::Chart::XAxis.new # this also creates the new labels
+        @chart.x_axis.grid_colour = @grid_color if @grid_color
+        @chart.x_axis.steps = @x_steps if @x_steps # this is actuall the grid!
+        @chart.x_axis.colour = @x_color if @x_color
+        @chart.x_axis.labels.labels = @x_labels if @x_labels
+        @chart.x_axis.labels.size = @x_label_size if @x_label_size
+        @chart.x_axis.labels.colour = @x_label_color if @x_axis_label_color
+        @chart.x_axis.labels.rotate = @x_label_orientation if @x_label_orientation
+        @chart.x_axis.labels.steps = @x_label_steps if @x_label_steps # this is the labels
+        
+      end
+      
+      # x legend
+      if x_legend_set?
+        @chart.x_legend = Ofc::Chart::XLegend.new
+        @chart.x_legend.text = @x_legend if @x_legend
+        @x_legend_style ||= {}
+        @x_legend_style['color'] = @x_legend_color unless @x_legend_style['color']
+        @x_legend_style['font-size'] = @x_legend_size unless @x_legend_style['font-size']
+        # @x_legend_style.merge!({'color' => @x_legend_color, 'font-size' => @x_legend_size})  if @x_legend_style.empty? # merge style with color & size
+        @chart.x_legend.style = css(@x_legend_style) if @x_legend_style
+      end
+      
+      # y axis
+      if y_axis_set? || y_labels_set?
+        @chart.y_axis = Ofc::Chart::YAxis.new # this creates the labels
+        @chart.y_axis.grid_colour = @grid_color if @grid_color
+        @chart.y_axis.steps = @y_steps if @y_steps
+        @chart.y_axis.colour = @y_color if @y_color
+        @chart.y_axis.labels = @y_labels if @y_labels
+
+        # this is using the (incorrect?) idea of y axis labels
+        # @chart.y_axis.labels.labels = @y_labels if @y_labels
+        # @chart.y_axis.labels.size = @y_label_size if @y_label_size
+        # @chart.y_axis.labels.colour = @y_label_color if @y_label_color
+
+        # if we don't have a max, calc it, OFC used to do this.
+        @chart.y_axis.max = if @y_max
+          @y_max
+        else
+          max = @data.max
+          max%2 == 0 ? max : max+1
+        end
+      end
+            
+      # y legend
+      if y_legend_set?
+        @chart.y_legend = Ofc::Chart::YLegend.new
+        @chart.y_legend.text = @y_legend if @y_legend
+        @y_legend_style ||= {}
+        @y_legend_style['color'] = @y_legend_color unless @y_legend_style['color']
+        @y_legend_style['font-size'] = @y_legend_size unless @y_legend_style['font-size']
+        # @y_legend_style.merge!({'color' => @y_legend_color, 'font-size' => @y_legend_size}) if @y_legend_style.empty? # merge style with color & size
+        @chart.y_legend.style = css(@y_legend_style) if @y_legend_style
+      end
+      
+      # chart object!
       @element = chart_factory(@type)
       
       # set the dot specific stuff
-      if is_dottable_chart(@type)
+      if dottable_chart?
         @element.dot_size = @dot_size if @dot_size
         @element.halo_size = @dot_margin + @dot_size if @dot_margin
       end
@@ -186,8 +220,8 @@ module Ofchart
       @element.width = @line_width if @element.respond_to?(:width) && @line_width
       @element.stroke = @line_width if @element.respond_to?(:stroke) && @line_width
 
-      # set the pie stuff
-      if @type == 'pie'
+      # set the pie stuff - we do this last because some stuff is overriden here
+      if pie_chart?
         @pie_label_style ||= {}
         @pie_label_style['color'] = @pie_label_color unless @pie_label_style['color']
         @pie_label_style['font-size'] = @pie_label_size unless @pie_label_style['font-size']
@@ -241,9 +275,42 @@ module Ofchart
         end
       end
       
+      def pie_chart?
+        @type == 'pie'
+      end
+      
       # TODO: Move this into the chart itself
-      def is_dottable_chart(chart_type)
-        [:area_hollow, :line, :line_dot, :line_hollow, :scatter].include?(chart_type.to_sym)
+      def dottable_chart?
+        [:area_hollow, :line, :line_dot, :line_hollow, :scatter].include?(@type.to_sym)
+      end
+      
+      def tooltip_set?
+        # any props for tool tip set?
+        @tip || @tip_background_color || @tip_color || @tip_style || @tip_body_style || @tip_rounded || @tip_border_width || @tip_shadowed
+      end
+      
+      def x_axis_set?
+        @grid_color || @x_steps || @x_color
+      end
+      
+      def x_legend_set?
+        @x_legend || @x_legend_color || @x_legend_size || @x_legend_style.length > 0
+      end
+      
+      def x_labels_set?
+        @x_labels || @x_label_size || @x_axis_label_color || @x_label_orientation
+      end
+      
+      def y_axis_set?
+        @grid_color || @y_steps || @y_color
+      end
+      
+      def y_legend_set?
+        @y_legend || @y_legend_color || @y_legend_size || @y_legend_style.length > 0
+      end
+      
+      def y_labels_set?
+        @y_labels || @y_label_color || @y_label_size
       end
       
   end

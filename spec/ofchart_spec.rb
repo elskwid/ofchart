@@ -114,6 +114,20 @@ describe Ofchart::Chart do
     @chart.animate_pie.should == false
   end  
   
+  it "should use the title_style passed in" do
+    @chart = Ofchart::Chart.new(:title_style => {'font-size' => 8, 'color' => '#EEEEEE'})
+    chart_obj = @chart.build_chart
+    chart_obj.title.style.should include('font-size:8')
+    chart_obj.title.style.should include('color:#EEEEEE')
+  end
+  
+  it "should override the title style with size and color" do
+    @chart = Ofchart::Chart.new(:title_size => 28, :title_color => '#AAAAAA')
+    chart_obj = @chart.build_chart
+    chart_obj.title.style.should include('font-size:28')
+    chart_obj.title.style.should include('color:#AAAAAA')
+  end
+  
   it "should output a chart object" do
    chart_obj = @chart.build_chart 
    chart_obj.should be_a_kind_of(Ofc::Chart)

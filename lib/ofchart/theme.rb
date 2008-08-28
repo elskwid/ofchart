@@ -8,6 +8,7 @@ module Ofchart
 
     attr_accessor :name,
                   :color,
+                  :outline,
                   :colors,
                   :background,
                   :title_size,
@@ -55,10 +56,13 @@ module Ofchart
       {
         :theme => name,
         :color => color,
+        :outline_color => outline,
         :colors => colors,
         :background_color => background,
         :title_color => title_color,
         :title_size => title_size,
+        :x_color => x_color,
+        :y_color => y_color,
         :x_legend_color => legend_color,
         :x_legend_size => legend_size,
         :y_legend_color => legend_color,
