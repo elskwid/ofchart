@@ -57,20 +57,22 @@ module Ofchart
         :color => color,
         :colors => colors,
         :background_color => background,
-        :title_size => title_size,
         :title_color => title_color,
-        :x_legend_size => legend_size,
+        :title_size => title_size,
         :x_legend_color => legend_color,
-        :y_legend_size => legend_size,
+        :x_legend_size => legend_size,
         :y_legend_color => legend_color,
+        :y_legend_size => legend_size,
         :x_key_size => key_size,
-        :x_label_size => x_size,
         :x_label_color => x_color,
-        :y_label_size => y_size,
+        :x_label_size => x_size,
         :y_label_color => y_color,
+        :y_label_size => y_size,
         :grid_color => grid_color,
         :tip_rounded => rounded,
-        :animate_pie => animated
+        :animate_pie => animated,
+        :pie_label_color => legend_color,
+        :pie_label_size => legend_size
       }.reject{|k,v| v.nil?} # remove nil values
     end
   end

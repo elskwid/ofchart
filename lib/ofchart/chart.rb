@@ -22,6 +22,7 @@ module Ofchart
                   :title_color, # foreground color of the title 
                   :title_size, # font-size of the title
                   :title_style, # hash of style for the title
+                  :tip, # static text or magic vars #percent# #val# #total# (others?)
                   :tip_background_color, # color for the background of the tips
                   :tip_color, # foreground color for the first line of the tip
                   :tip_style, # style for the first line of the tip
@@ -39,8 +40,8 @@ module Ofchart
                   :x_legend_size, # font-size of the x legend
                   :x_legend_style, # hash of style for the x legend
                   :x_labels, # array of labels for x axis
-                  :x_label_size, # font-size for x labels
                   :x_label_color, # color for x labels
+                  :x_label_size, # font-size for x labels
                   :x_label_orientation, # (horizontal || vertical) default to horizontal
                   :y_steps, # how many y ticks are visible (2 makes every 2nd step visible)
                   :y_color, # color for the yaxis not the grid
@@ -49,10 +50,14 @@ module Ofchart
                   :y_legend_size, # font-size of the y legend
                   :y_legend_style, # hash of style for the y legend
                   :y_labels, # array of labels for y axis
-                  :y_label_size, # font-size for y labels
                   :y_label_color, # color for y labels
+                  :y_label_size, # font-size for y labels
                   :dot_size, # for charts with dots, this is the size 
                   :dot_margin, # for charts with dots, this is the margin around them (ofc calls this the halo)
+                  :pie_labels, # labels the pie slices (not the same as the tooltip)
+                  :pie_label_color,
+                  :pie_label_size,
+                  :pie_label_style,
                   :animate_pie, # (true | false) if the pie should be animated (default true [1])
                   :pie_angle, # the angle of the start of the pie (default is 90)
                   :line_width # used to set the stroke/line width in places
@@ -122,6 +127,7 @@ module Ofchart
       # @title_style.merge!({'color' => @title_color, 'font-size' => @title_size}) if @title_style.empty? # merge style with color & size
       @chart.title.style = css(@title_style) if @title_style
       # tool tip
+      @chart.tool_tip.text = @tip if @tip
       @chart.tool_tip.background = @tip_background_color if @tip_background_color
       @chart.tool_tip.colour = @tip_color if @tip_color
       @chart.tool_tip.title = css(@tip_style) if @tip_style
@@ -170,21 +176,30 @@ module Ofchart
         @element.halo_size = @dot_margin + @dot_size if @dot_margin
       end
       
-      # set the pie stuff
-      if @type == 'pie'
-        @element.animate = @animate_pie ? 1 : 0 unless @animate_pie.nil?
-        @element.start_angle = @pie_angle if @pie_angle
-      end
-      
       # set the rest, some colors aren't used by some charts, but it doesn't hurt to have
       # it in the json (I think?!?)
-      @element.colour = @color if @color
+      @element.colour = @color if @element.respond_to?(:color) && @color
       @element.colors = @colors if @element.respond_to?(:colors) && @colors
       @element.outline_color = @outline_color if @element.respond_to?(:outline_color) && @outline_color
       @element.text = @x_key if @element.respond_to?(:text) && @x_key
       @element.font_size = @x_key_size if @element.respond_to?(:font_size) && @x_key_size
       @element.width = @line_width if @element.respond_to?(:width) && @line_width
       @element.stroke = @line_width if @element.respond_to?(:stroke) && @line_width
+
+      # set the pie stuff
+      if @type == 'pie'
+        @pie_label_style ||= {}
+        @pie_label_style['color'] = @pie_label_color unless @pie_label_style['color']
+        @pie_label_style['font-size'] = @pie_label_size unless @pie_label_style['font-size']
+        # @y_legend_style.merge!({'color' => @y_legend_color, 'font-size' => @y_legend_size}) if @y_legend_style.empty? # merge style with color & size
+        # @chart.pie.style = css(@pie_label_style) if @pie_label_style
+        @element.label_colour = @pie_label_style['color']
+        @element.font_size = @pie_label_style['font-size']
+        @element.animate = @animate_pie ? 1 : 0 unless @animate_pie.nil?
+        @element.start_angle = @pie_angle if @pie_angle
+        @element.labels = @pie_labels unless @pie_labels.nil?
+        @element.tip = @tip if @tip
+      end
       
       # the data
       @element.values = @data

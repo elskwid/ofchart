@@ -12,7 +12,7 @@ module Ofc
       alias_attribute :color, :bg_colour
       alias_attribute :image, :bg_image
       
-      def to_json
+      def to_json(*a)
         # background is a seperate object in OFC, shown at the top level
         "#{bg_colour.to_json}"
       end

@@ -44,7 +44,8 @@ module Ofc
         :dot_size       => 'dot-size',
         :halo_size      => 'halo-size',
         :gradient_fill  => 'gradient-fill',
-        :start_angle    => 'start-angle'
+        :start_angle    => 'start-angle',
+        :label_colour   => 'label-colour'
       }
       if self.class.respond_to? :chart_attributes
         result = '{'

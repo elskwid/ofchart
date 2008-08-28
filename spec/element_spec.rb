@@ -287,13 +287,14 @@ describe Ofc::Elements::Pie do
   it "should have the default fields and values" do
     attributes = {:alpha => 0.5,
                   :animate => 1,
-                  :colour => '#900000',
                   :colours => ['#900000','#009000'],
+                  :font_size => 10,
                   :gradient_fill => 1, # gradient-fill
+                  :label_colour => '#900000',
                   :start_angle => 90, # start-angle
                   :stroke => 1,
                   :tip => nil,
-                  :color => '#900000',
+                  :label_color => '#900000',
                   :colors => ['#900000','#009000']}
     b = Ofc::Elements::Pie.new
     attributes.each do |k,v|
