@@ -14,7 +14,7 @@
   # :bar_colors: [ *blue, *yellow, *green, *red, *purple, *orange ]
   :background: *white
   :title_color: *black
-  :title_size: &titlesize 12
+  :title_size: &titlesize 20
   :legend_size: &legendsize 11
   :legend_color: &grey dadada
   :key_size: *titlesize

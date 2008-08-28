@@ -50,9 +50,10 @@ module Ofc
         result = '{'
         result << self.class.chart_attributes.map do |key|
           # check object for object_name and add it to the keys
-          ofc_keys[key] = self.send(key).object_name if self.send(key).respond_to? :object_name
+          # ofc_keys[key] = self.send(key).object_name if self.send(key).respond_to? :object_name
+          obj_name = self.send(key).object_name if self.send(key).respond_to? :object_name
           # skip some named fields and those that return nil
-          "#{(ofc_keys[key]||key).to_json}: #{self.send(key).to_json}" unless key == :object_name || self.send(key).nil?
+          "#{(obj_name||ofc_keys[key]||key).to_json}: #{self.send(key).to_json}" unless key == :object_name || self.send(key).nil?
         end.reject{|k| k.nil?} * ', '
         result << '}'
       else

@@ -116,7 +116,10 @@ module Ofchart
       # title
       @chart.title.text = @title if @title
       @title_style ||= {}
-      @title_style.merge!({'color' => @title_color, 'font-size' => @title_size}) if @title_style.empty? # merge style with color & size
+      @title_style['color'] = @title_color unless @title_style['color']
+      @title_style['font-size']= @title_size unless @title_style['font-size']
+      # This doesn't quite work the way I want
+      # @title_style.merge!({'color' => @title_color, 'font-size' => @title_size}) if @title_style.empty? # merge style with color & size
       @chart.title.style = css(@title_style) if @title_style
       # tool tip
       @chart.tool_tip.background = @tip_background_color if @tip_background_color
@@ -133,7 +136,9 @@ module Ofchart
       # x legend
       @chart.x_legend.text = @x_legend if @x_legend
       @x_legend_style ||= {}
-      @x_legend_style.merge!({'color' => @x_legend_color, 'font-size' => @x_legend_size})  if @x_legend_style.empty? # merge style with color & size
+      @x_legend_style['color'] = @x_legend_color unless @x_legend_style['color']
+      @x_legend_style['font-size'] = @x_legend_size unless @x_legend_style['font-size']
+      # @x_legend_style.merge!({'color' => @x_legend_color, 'font-size' => @x_legend_size})  if @x_legend_style.empty? # merge style with color & size
       @chart.x_legend.style = css(@x_legend_style) if @x_legend_style
       # x labels
       @chart.x_axis_labels.labels = @x_labels if @x_labels
@@ -147,7 +152,9 @@ module Ofchart
       # y legend
       @chart.y_legend.text = @y_legend if @y_legend
       @y_legend_style ||= {}
-      @y_legend_style.merge!({'color' => @y_legend_color, 'font-size' => @y_legend_size}) if @y_legend_style.empty? # merge style with color & size
+      @y_legend_style['color'] = @y_legend_color unless @y_legend_style['color']
+      @y_legend_style['font-size'] = @y_legend_size unless @y_legend_style['font-size']
+      # @y_legend_style.merge!({'color' => @y_legend_color, 'font-size' => @y_legend_size}) if @y_legend_style.empty? # merge style with color & size
       @chart.y_legend.style = css(@y_legend_style) if @y_legend_style
       # y labels
       @chart.y_axis_labels.labels = @y_labels if @y_labels
